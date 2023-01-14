@@ -7,7 +7,7 @@ export type TodoItemModel = {
 }
 
 const TodoItem: React.FC<{ todoItem: TodoItemModel }> = ({ todoItem }) => {
-    return (<div>coucou</div>);
+    return (<div>{todoItem.name}</div>);
 }
 
 export default TodoItem;

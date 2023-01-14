@@ -1,0 +1,16 @@
+{
+    "todoLists": [
+    {
+        "id": 0,
+        "name": "",
+        "todoItems": [{
+        "id": 0,
+        "name": "yeah",
+        "position": 1,
+        "ticked": false,
+        "archived": false
+        }]
+    }
+    ]
+}
+
