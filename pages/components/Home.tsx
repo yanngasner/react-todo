@@ -1,6 +1,7 @@
+import { TodoListModel } from '@/models/TodoListModel';
 import styles from '@/styles/Home.module.css'
 import { useEffect, useState } from 'react';
-import TodoList, { TodoListModel } from './TodoList';
+import TodoListCard from './TodoListCard';
 
 const Home = () => {
     const [todoLists, setToDoLists] = useState<TodoListModel[]>([]);
@@ -8,13 +9,15 @@ const Home = () => {
         fetch('/api/get-all')
             .then((res) => res.json())
             .then((data) => {
-                setToDoLists(JSON.parse(data).todoLists)
+                setToDoLists(JSON.parse(data));
             })
     }, [])
     return (
         <>
             <main className={styles.main}>
-                {todoLists.map(todoList => <TodoList key={todoList.id} todoList={todoList} />)}
+                <div className={styles.grid}>
+                    {todoLists.map(todoList => <TodoListCard key={todoList.id} todoList={todoList} />)}
+                </div>
             </main>
         </>);
 
@@ -23,19 +26,7 @@ export default Home;
 
 
 {/* <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
+
 
           <a
             href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
