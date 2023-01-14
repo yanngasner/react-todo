@@ -1,10 +1,5 @@
-export type TodoItemModel = {
-    id: number;
-    name: string;
-    position: number;
-    ticked: boolean;
-    archived: boolean;
-}
+import { TodoItemModel } from "@/models/TodoItemModel";
+
 
 const TodoItem: React.FC<{ todoItem: TodoItemModel }> = ({ todoItem }) => {
     return (<div>{todoItem.name}</div>);
