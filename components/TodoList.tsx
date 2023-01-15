@@ -1,5 +1,6 @@
 import { TodoItemModel } from "@/models/TodoItemModel";
 import { TodoListModel } from "@/models/TodoListModel";
+import { useState } from "react";
 import { isTemplateExpression } from "typescript";
 import TodoItem from "./TodoItem";
 
@@ -11,6 +12,7 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList }) => {
+    const [itemName, setItemName] = useState<string>("");
     const onClearListClicked = () => {
         const updatedList: TodoListModel = {
             ...todoList,
@@ -20,6 +22,16 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
     }
     const onDeleteListClicked = () => {
         deleteList();
+    }
+    const onAddItemClicked = () => {
+        const newItemIndex = todoList.todoItems.length > 0
+            ? Math.max(...todoList.todoItems.map(item => item.id)) + 1
+            : 0;
+        const updatedList: TodoListModel = {
+            ...todoList,
+            todoItems: [...todoList.todoItems, { id: newItemIndex, name: itemName, achieved: false }]
+        }
+        updateList(updatedList);
     }
     const deleteItem = (id: number) => {
         const updatedList: TodoListModel = {
@@ -62,6 +74,9 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
             <div></div>
             <button onClick={onDeleteListClicked}>Supprimer</button>
             <button onClick={onClearListClicked}>Nettoyer</button>
+            <input onChange={e => setItemName(e.target.value)} />
+            <button onClick={onAddItemClicked}>Add</button>
+
         </>
     );
 }
