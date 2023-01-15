@@ -1,41 +1,38 @@
 {
     "todoLists": [
-    {
-        "id": 1,
-        "name": "TODO 1",
-        "description": "La première todolist",
-        "todoItems": [{
-        "id": 0,
-        "name": "yeah",
-        "position": 1,
-        "ticked": false,
-        "archived": false
-        }]
-    },
-    {
-        "id": 2,
-        "name": "TODO 2",
-        "description": "La seconde todolist",
-        "todoItems": []
-    },
-    {
-        "id": 3,
-        "name": "TODO 3",
-        "description": "La troisième todolist",
-        "todoItems": []
-    },
-    {
-        "id": 4,
-        "name": "TODO 4",
-        "description": "La quatrième todolist",
-        "todoItems": []
-    },
-    {
-        "id": 5,
-        "name": "TODO 5",
-        "description": "La cinquième todolist",
-        "todoItems": []
-    }
+        {
+            "id": 1,
+            "name": "TODO 1",
+            "description": "La première todolist",
+            "todoItems": [
+                {
+                    "id": 0,
+                    "name": "yeah",
+                    "achieved": false
+                },
+                {
+                    "id": 1,
+                    "name": "coucou",
+                    "achieved": false
+                },
+                {
+                    "id": 2,
+                    "name": "zyva",
+                    "achieved": false
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "TODO 4",
+            "description": "La quatrième todolist",
+            "todoItems": []
+        },
+        {
+            "id": 5,
+            "name": "TODO 5",
+            "description": "La cinquième todolist",
+            "todoItems": []
+        }
     ]
 }
-

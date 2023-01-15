@@ -21,6 +21,31 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
     const onDeleteListClicked = () => {
         deleteList();
     }
+    const deleteItem = (id: number) => {
+        const updatedList: TodoListModel = {
+            ...todoList,
+            todoItems: [...todoList.todoItems.filter(item => item.id !== id)]
+        }
+        updateList(updatedList);
+    }
+    const updateItem = (updatedItem: TodoItemModel, moveDown = false) => {
+        let updatedList: TodoListModel = {
+            ...todoList,
+            todoItems: [...todoList.todoItems]
+        }
+        if (moveDown) {
+            updatedList.todoItems = [...updatedList.todoItems.filter(item => item.id !== updatedItem.id), updatedItem];
+        }
+        else {
+            updatedList.todoItems.forEach((item, index) => {
+                if (item.id === updatedItem.id) {
+                    item.achieved = updatedItem.achieved;
+                    item.name = updatedItem.name;
+                }
+            });
+        }
+        updateList(updatedList);
+    }
     return (
         <>
             <div>{todoList.id}</div>
@@ -30,8 +55,11 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
                 <TodoItem
                     key={item.id}
                     todoItem={item}
+                    updateItem={updateItem}
+                    deleteItem={deleteItem}
                 />)
             }
+            <div></div>
             <button onClick={onDeleteListClicked}>Supprimer</button>
             <button onClick={onClearListClicked}>Nettoyer</button>
         </>
