@@ -21,9 +21,11 @@ const useListActions = ({
     };
     updateList(updatedList);
   };
+
   const onDeleteListClicked = () => {
     deleteList();
   };
+
   const onAddItemClicked = (itemName: string) => {
     const newItemIndex = todoList.todoItems.length > 0 ? Math.max(...todoList.todoItems.map((item) => item.id)) + 1 : 0;
     const updatedList: TodoListModel = {
@@ -32,6 +34,7 @@ const useListActions = ({
     };
     updateList(updatedList);
   };
+
   const deleteItem = (id: number) => {
     const updatedList: TodoListModel = {
       ...todoList,
@@ -39,6 +42,7 @@ const useListActions = ({
     };
     updateList(updatedList);
   };
+
   const updateItem = (updatedItem: TodoItemModel, moveDown = false) => {
     let updatedList: TodoListModel = {
       ...todoList,
