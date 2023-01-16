@@ -27,7 +27,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todoItem, updateItem, deleteItem })
                 onClick={() => setIsEditing(true)}
                 onMouseOut={() => setIsEditing(false)}>
                 {isEditing ?
-                    <Input className='inputNameInput'
+                    <Input
                         value={todoItem.name}
                         onChange={(event) => onItemRenamed(event.target.value)}
                         onKeyDown={(event) => onKeyDown(event.key)}

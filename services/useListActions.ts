@@ -11,6 +11,8 @@ const useListActions = ({
   () => void,
   () => void,
   (itemName: string) => void,
+  (updatedName: string) => void,
+  (updatedDescription: string) => void,
   (id: number) => void,
   (updatedItem: TodoItemModel, moveDown: boolean) => void
 ] => {
@@ -26,11 +28,29 @@ const useListActions = ({
     deleteList();
   };
 
-  const onAddItemClicked = (itemName: string) => {
+  const onItemAdded = (itemName: string) => {
     const newItemIndex = todoList.todoItems.length > 0 ? Math.max(...todoList.todoItems.map((item) => item.id)) + 1 : 0;
     const updatedList: TodoListModel = {
       ...todoList,
       todoItems: [...todoList.todoItems, { id: newItemIndex, name: itemName, achieved: false }],
+    };
+    updateList(updatedList);
+  };
+
+  const onListRenamed = (updatedName: string) => {
+    const updatedList: TodoListModel = {
+      ...todoList,
+      todoItems: [...todoList.todoItems],
+      name: updatedName,
+    };
+    updateList(updatedList);
+  };
+
+  const onDescriptionChanged = (updatedDescription: string) => {
+    const updatedList: TodoListModel = {
+      ...todoList,
+      todoItems: [...todoList.todoItems],
+      description: updatedDescription,
     };
     updateList(updatedList);
   };
@@ -61,7 +81,7 @@ const useListActions = ({
     updateList(updatedList);
   };
 
-  return [onClearListClicked, onDeleteListClicked, onAddItemClicked, deleteItem, updateItem];
+  return [onClearListClicked, onDeleteListClicked, onItemAdded, onListRenamed, onDescriptionChanged, deleteItem, updateItem];
 };
 
 export { useListActions };

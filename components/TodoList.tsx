@@ -7,33 +7,113 @@ import { TodoListModel } from "@/models/TodoListModel";
 import { TodoListProps } from "@/models/TodoListProps";
 import { useListActions } from "@/services/useListActions";
 import TodoItem from "./TodoItem";
+import { Center, Divider, Icon, IconButton, Input, Tooltip } from "@chakra-ui/react";
+import { MdCleaningServices } from 'react-icons/md'
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+
 
 
 const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList }) => {
 
     const [itemName, setItemName] = useState<string>("");
-    const [onClearListClicked, onDeleteListClicked, onAddItemClicked, deleteItem, updateItem]
+    const [isEditingName, setIsEditingName] = useState(false);
+    const [isEditingDescription, setIsEditingDescription] = useState(false);
+    const onKeyDown = (key: string) => {
+        if (['Enter', 'Escape'].includes(key)) {
+            setIsEditingName(false);
+            setIsEditingDescription(false);
+        }
+    }
+    const onAddKeyDown = (key: string) => {
+        if (key == 'Enter') {
+            onAddItemClicked();
+        }
+    }
+    const onAddItemClicked = () => {
+        onItemAdded(itemName);
+        setItemName('');
+
+    }
+    const [onClearListClicked, onDeleteListClicked, onItemAdded, onListRenamed, onDescriptionChanged, deleteItem, updateItem]
         = useListActions({ todoList, updateList, deleteList });
 
     return (
         <div className={styles.container}>
             <div className={styles.todoList}>
                 <div className={styles.head}>
-                    <h1>{todoList.name}</h1>
-                    <h2>{todoList.description}</h2>
+                    <div className={styles.titleArea}>
+                        <div className={styles.headFirst}>
+                            <div className={styles.headButtonItem}>
+                            </div>
+                            <div className={styles.listName}
+                                onClick={() => setIsEditingName(true)}
+                                onMouseOut={() => setIsEditingName(false)} >
+                                {isEditingName ?
+                                    <div className={styles.nameInput}>
+                                        <Input size='lg' sx={{ textAlign: 'center' }}
+                                            value={todoList.name}
+                                            onChange={(event) => onListRenamed(event.target.value)}
+                                            onKeyDown={(event) => onKeyDown(event.key)}
+                                        />
+                                    </div>
+                                    : <h1>{todoList.name}</h1>
+                                }
+                            </div>
+                            <div className={styles.headButtonItem}>
+                                <IconButton icon={<DeleteIcon />} onClick={onDeleteListClicked} colorScheme='teal' aria-label={""} />
+                            </div>
+                        </div>
+                        <div className={styles.listDescription}
+                            onClick={() => setIsEditingDescription(true)}
+                            onMouseOut={() => setIsEditingDescription(false)}>
+                            {isEditingDescription ?
+                                <div className={styles.descriptionInput}>
+                                    <Input sx={{ textAlign: 'center' }}
+                                        value={todoList.description}
+                                        onChange={(event) => onDescriptionChanged(event.target.value)}
+                                        onKeyDown={(event) => onKeyDown(event.key)}
+                                    />
+                                </div>
+                                : <h2>{todoList.description}</h2>
+                            }
+                        </div>
+                    </div>
+                    <div className={styles.buttonItem}>
+                        <IconButton icon={<Icon as={MdCleaningServices} />} onClick={onClearListClicked} colorScheme='teal' aria-label={""} />
+                    </div>
+
                 </div>
-                {todoList.todoItems.map(item =>
-                    <TodoItem
-                        key={item.id}
-                        todoItem={item}
-                        updateItem={updateItem}
-                        deleteItem={deleteItem}
-                    />)
-                }
-                <button onClick={() => onDeleteListClicked}>Supprimer</button>
-                <button onClick={onClearListClicked}>Nettoyer</button>
-                <input onChange={e => setItemName(e.target.value)} />
-                <button onClick={() => onAddItemClicked(itemName)}>Add</button>
+                <Center height='50px'>
+                    <Divider />
+                </Center>
+                <div className={styles.items}>
+                    {todoList.todoItems.map(item =>
+                        <TodoItem
+                            key={item.id}
+                            todoItem={item}
+                            updateItem={updateItem}
+                            deleteItem={deleteItem}
+                        />)
+                    }
+                </div>
+                <Center height='50px'>
+                    <Divider />
+                </Center>
+                <div className={styles.addArea}>
+                    <div className={styles.buttonItem}>
+                    </div>
+                    <div className={styles.addInput}>
+                        <Input size='lg' sx={{ textAlign: 'center' }}
+                            value={itemName}
+                            onChange={e => setItemName(e.target.value)}
+                            onKeyDown={(event) => onAddKeyDown(event.key)}
+                        />
+                    </div>
+                    <div className={styles.buttonItem}>
+                        <IconButton icon={<AddIcon />} onClick={onAddItemClicked} colorScheme='teal' aria-label={""} />
+                    </div>
+                </div>
+
             </div>
         </div>
 

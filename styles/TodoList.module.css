@@ -14,16 +14,61 @@
 }
 
 .head {
-    text-align:center;
+    text-align: center;
     margin: 20px;
+}
+
+.headFirst  {
+    display: flex;
+}
+
+.listName {
+    width: 60%;
+}
+
+.items {
+    max-height: 60%;
+    overflow-y: scroll;
+}
+
+.headButtonItem {
+    margin: auto auto;
+    width: 20%
+}
+
+.buttonItem {
+    margin: auto auto;
 }
 
 .head h1 {
     font-size: 20px;
-    margin: 20px;
 }
 
 .head h2 {
     font-size: 15px;
-    margin: 20px;
+}
+
+.listName,
+.listDescription {
+    display: flex;
+    flex-direction: column;
+    height: 50px} 
+
+.listName h1,
+.head h2 {
+    margin: auto 0;
+}
+
+.nameInput,
+.descriptionInput {
+    margin: auto 0;
+    text-align: center;
+}
+
+.addArea {
+    display: flex;
+}
+
+.addInput {
+    width: 80%
 }
