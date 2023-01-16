@@ -1,11 +1,12 @@
+import { useState } from "react";
+
+import styles from '@/styles/TodoList.module.css';
+
 import { TodoItemModel } from "@/models/TodoItemModel";
 import { TodoListModel } from "@/models/TodoListModel";
 import { TodoListProps } from "@/models/TodoListProps";
 import { useListActions } from "@/services/useListActions";
-import { useState } from "react";
-import { isTemplateExpression } from "typescript";
 import TodoItem from "./TodoItem";
-import styles from '@/styles/TodoList.module.css';
 
 
 const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList }) => {

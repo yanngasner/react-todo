@@ -1,0 +1,23 @@
+.todoItem {
+    display: flex;
+    height: 50px;
+    margin: auto auto;
+    width: 75%;
+}
+
+.itemName {
+    width: 100%;
+    margin: auto 20px;
+    vertical-align: center;   
+    display: flex;
+    flex-direction: column;
+} 
+
+.itemName p {
+    vertical-align: middle;
+    margin: auto 0;
+}
+
+.deleteIcon {
+    margin: auto 0;
+}
