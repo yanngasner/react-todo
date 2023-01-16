@@ -1,0 +1,29 @@
+.container {
+    background-color: aquamarine;
+    height: 100vh;
+    display: flex;
+}
+
+.todoList {
+    margin: auto auto;
+    max-width: 500px;
+    width: 75%;
+    height: 90%;
+    border-radius: var(--border-radius);
+    background-color: white;
+}
+
+.head {
+    text-align:center;
+    margin: 20px;
+}
+
+.head h1 {
+    font-size: 20px;
+    margin: 20px;
+}
+
+.head h2 {
+    font-size: 15px;
+    margin: 20px;
+}
