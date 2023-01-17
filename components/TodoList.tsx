@@ -32,7 +32,6 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
     const onAddItemClicked = () => {
         onItemAdded(itemName);
         setItemName('');
-
     }
     const [onClearListClicked, onDeleteListClicked, onItemAdded, onListRenamed, onDescriptionChanged, deleteItem, updateItem]
         = useListActions({ todoList, updateList, deleteList });

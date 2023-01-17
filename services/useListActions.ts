@@ -29,10 +29,10 @@ const useListActions = ({
   };
 
   const onItemAdded = (itemName: string) => {
-    const newItemIndex = todoList.todoItems.length > 0 ? Math.max(...todoList.todoItems.map((item) => item.id)) + 1 : 0;
+    const newItemId = todoList.todoItems.length > 0 ? Math.max(...todoList.todoItems.map((item) => item.id)) + 1 : 0;
     const updatedList: TodoListModel = {
       ...todoList,
-      todoItems: [...todoList.todoItems, { id: newItemIndex, name: itemName, achieved: false }],
+      todoItems: [...todoList.todoItems, { id: newItemId, name: itemName, achieved: false }],
     };
     updateList(updatedList);
   };
