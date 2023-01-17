@@ -27,12 +27,12 @@ const TodoItem: React.FC<TodoItemProps> = ({ todoItem, updateItem, deleteItem })
                 onClick={() => setIsEditing(true)}
                 onMouseOut={() => setIsEditing(false)}>
                 {isEditing ?
-                    <Input
+                    <Input focusBorderColor='#107980'
                         value={todoItem.name}
                         onChange={(event) => onItemRenamed(event.target.value)}
                         onKeyDown={(event) => onKeyDown(event.key)}
                     />
-                    : <p>{todoItem.name}</p>
+                    : <p className={todoItem.achieved ? styles.achieved : ''}>{todoItem.name}</p>
                 }
             </div>
             <div className={styles.deleteIcon}>

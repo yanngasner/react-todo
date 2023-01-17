@@ -50,7 +50,7 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
                                 onMouseOut={() => setIsEditingName(false)} >
                                 {isEditingName ?
                                     <div className={styles.nameInput}>
-                                        <Input size='lg' sx={{ textAlign: 'center' }}
+                                        <Input focusBorderColor='#107980' size='lg' sx={{ textAlign: 'center' }}
                                             value={todoList.name}
                                             onChange={(event) => onListRenamed(event.target.value)}
                                             onKeyDown={(event) => onKeyDown(event.key)}
@@ -68,7 +68,7 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
                             onMouseOut={() => setIsEditingDescription(false)}>
                             {isEditingDescription ?
                                 <div className={styles.descriptionInput}>
-                                    <Input sx={{ textAlign: 'center' }}
+                                    <Input focusBorderColor='#107980' sx={{ textAlign: 'center' }}
                                         value={todoList.description}
                                         onChange={(event) => onDescriptionChanged(event.target.value)}
                                         onKeyDown={(event) => onKeyDown(event.key)}
@@ -103,7 +103,7 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
                     <div className={styles.buttonItem}>
                     </div>
                     <div className={styles.addInput}>
-                        <Input size='lg' sx={{ textAlign: 'center' }}
+                        <Input focusBorderColor='#107980' size='lg' sx={{ textAlign: 'center' }}
                             value={itemName}
                             onChange={e => setItemName(e.target.value)}
                             onKeyDown={(event) => onAddKeyDown(event.key)}
