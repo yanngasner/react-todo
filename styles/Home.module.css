@@ -4,7 +4,7 @@
   justify-content: space-around;
   align-items: center;
   padding: 6rem;
-  min-height: 100vh;
+  height: 100vh;
   color:white;
 }
 
@@ -13,7 +13,8 @@
   grid-template-columns: repeat(4, minmax(25%, auto));
   width: var(--max-width);
   max-width: 100%;
-  max-height: 50%;
+  height: 50%;
+  overflow-x: auto;
 }
 
 /* Mobile */
@@ -23,6 +24,7 @@
     margin-bottom: 120px;
     max-width: 320px;
     text-align: center;
+    height: 90%;
   }
 }
 
@@ -30,6 +32,7 @@
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
+    height: 75%;
   }
 }
 

@@ -5,11 +5,20 @@ import { TodoItemProps } from "@/models/TodoItemProps";
 import { useItemActions } from "@/services/useItemActions";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Button, Checkbox, IconButton, Input } from "@chakra-ui/react";
-import { KeyboardEventHandler, useState } from 'react';
+import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
 
 const TodoItem: React.FC<TodoItemProps> = ({ todoItem, updateItem, deleteItem }) => {
-    const [onToggleAchievementClicked, onItemRenamed, onDeleteItemClicked] = useItemActions({ todoItem, updateItem, deleteItem });
+
     const [isEditing, setIsEditing] = useState(false);
+    const inputRef = useRef(null);
+    useEffect(() => {
+        if (isEditing && inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [isEditing]);
+    const [onToggleAchievementClicked, onItemRenamed, onDeleteItemClicked]
+        = useItemActions({ todoItem, updateItem, deleteItem });
+
     const onKeyDown = (key: string) => {
         if (['Enter', 'Escape'].includes(key)) {
             setIsEditing(false);
@@ -25,9 +34,11 @@ const TodoItem: React.FC<TodoItemProps> = ({ todoItem, updateItem, deleteItem })
             />
             <div className={styles.itemName}
                 onClick={() => setIsEditing(true)}
-                onMouseOut={() => setIsEditing(false)}>
+                onMouseOut={() => setIsEditing(false)}
+                onBlur={() => setIsEditing(false)} >
                 {isEditing ?
                     <Input focusBorderColor='#107980'
+                        ref={inputRef}
                         value={todoItem.name}
                         onChange={(event) => onItemRenamed(event.target.value)}
                         onKeyDown={(event) => onKeyDown(event.key)}

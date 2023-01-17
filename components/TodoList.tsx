@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from '@/styles/TodoList.module.css';
 
@@ -18,6 +18,21 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
     const [itemName, setItemName] = useState<string>("");
     const [isEditingName, setIsEditingName] = useState(false);
     const [isEditingDescription, setIsEditingDescription] = useState(false);
+    const nameInputRef = useRef(null);
+    useEffect(() => {
+        if (isEditingName && nameInputRef.current) {
+            nameInputRef.current.focus();
+        }
+    }, [isEditingName]);
+    const descriptionInputRef = useRef(null);
+    useEffect(() => {
+        if (isEditingDescription && descriptionInputRef.current) {
+            descriptionInputRef.current.focus();
+        }
+    }, [isEditingDescription]);
+    const [onClearListClicked, onDeleteListClicked, onItemAdded, onListRenamed, onDescriptionChanged, deleteItem, updateItem]
+        = useListActions({ todoList, updateList, deleteList });
+
     const onKeyDown = (key: string) => {
         if (['Enter', 'Escape'].includes(key)) {
             setIsEditingName(false);
@@ -33,8 +48,6 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
         onItemAdded(itemName);
         setItemName('');
     }
-    const [onClearListClicked, onDeleteListClicked, onItemAdded, onListRenamed, onDescriptionChanged, deleteItem, updateItem]
-        = useListActions({ todoList, updateList, deleteList });
 
     return (
         <div className={styles.container}>
@@ -46,10 +59,12 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
                             </div>
                             <div className={styles.listName}
                                 onClick={() => setIsEditingName(true)}
-                                onMouseOut={() => setIsEditingName(false)} >
+                                onMouseOut={() => setIsEditingName(false)}
+                                onBlur={() => setIsEditingName(false)} >
                                 {isEditingName ?
                                     <div className={styles.nameInput}>
                                         <Input focusBorderColor='#107980' size='lg' sx={{ textAlign: 'center' }}
+                                            ref={nameInputRef}
                                             value={todoList.name}
                                             onChange={(event) => onListRenamed(event.target.value)}
                                             onKeyDown={(event) => onKeyDown(event.key)}
@@ -64,10 +79,12 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
                         </div>
                         <div className={styles.listDescription}
                             onClick={() => setIsEditingDescription(true)}
-                            onMouseOut={() => setIsEditingDescription(false)}>
+                            onMouseOut={() => setIsEditingDescription(false)}
+                            onBlur={() => setIsEditingDescription(false)} >
                             {isEditingDescription ?
                                 <div className={styles.descriptionInput}>
                                     <Input focusBorderColor='#107980' sx={{ textAlign: 'center' }}
+                                        ref={descriptionInputRef}
                                         value={todoList.description}
                                         onChange={(event) => onDescriptionChanged(event.target.value)}
                                         onKeyDown={(event) => onKeyDown(event.key)}
@@ -82,7 +99,7 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
                     </div>
 
                 </div>
-                <Center height='50px'>
+                <Center height='5%'>
                     <Divider />
                 </Center>
                 <div className={styles.items}>
@@ -95,7 +112,7 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, updateList, deleteList })
                         />)
                     }
                 </div>
-                <Center height='50px'>
+                <Center height='5%'>
                     <Divider />
                 </Center>
                 <div className={styles.addArea}>
